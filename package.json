@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/LeQuint/Chess/issues"
   },
-  "homepage": "https://github.com/LeQuint/Chess#readme"
+  "homepage": "https://github.com/LeQuint/Chess#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
