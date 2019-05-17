@@ -4,7 +4,6 @@ const port = process.env.PORT || 8080;        // set our port
 
 
 // Serve frontend
-console.log(__dirname);
 app.use(express.static(__dirname + '/public'));
 
 
