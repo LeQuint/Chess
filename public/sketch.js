@@ -36,6 +36,10 @@ function releasePiece() {
             currentPiece.xcoord = floor(mouseX/TILESIZE);
             currentPiece.ycoord = floor(mouseY/TILESIZE);
 
+            if ( possibleCastle == true ) {
+                castleLogic(currentPiece);
+            }
+
             if ( currentPiece.firstMove == true ) {
                 currentPiece.firstMove = false;
             }
@@ -52,6 +56,10 @@ function releasePiece() {
             currentPiece.beingMoved = false;
             currentPiece.xcoord = floor(mouseX/TILESIZE);
             currentPiece.ycoord = floor(mouseY/TILESIZE);
+
+            if ( possibleCastle == true ) {
+                castleLogic(currentPiece);
+            }
 
             if ( currentPiece.firstMove == true ) {
                 currentPiece.firstMove = false;
@@ -79,5 +87,6 @@ function releasePiece() {
         }
     }
 
+    possibleCastle = false;
     possibleMoves = [];
 }

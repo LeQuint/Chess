@@ -1,6 +1,7 @@
 const TILESIZE = 100; // size of tile in px
 
 let board;
+let possibleCastle = false;
 let possibleMoves = [];
 let whiteBoardControl = [];
 let blackBoardControl = [];
@@ -128,9 +129,6 @@ function checkIfWhitePieceIsHere(xcoord, ycoord) {
     return false;
 }
 
-function checkIfKingIsInDanger () {
-    
-}
 
 function removeBlackPieceAt ( xcoord, ycoord ) {
     board.blackPieces.forEach( function( piece, index ) {
@@ -272,3 +270,89 @@ function checkIfBlackHasWon () {
         return;
     }
 }
+
+
+function castleLogic (piece) {
+    if ( piece.xcoord == 1 && piece.ycoord == 0 ) { // white king side castle
+        let rook = returnPieceAt(0,0);
+
+        if ( rook != null ) {
+            rook.xcoord = 2;
+            rook.ycoord = 0;
+        }
+    }
+
+    else if ( piece.xcoord == 5 && piece.ycoord == 0 ) { // white queen side castle
+        let rook = returnPieceAt(7,0);
+
+        if ( rook != null ) {
+            rook.xcoord = 4;
+            rook.ycoord = 0;
+        }
+    }
+
+    else if ( piece.xcoord == 1 && piece.ycoord == 7 ) { // black king side castle
+        let rook = returnPieceAt(0,7);
+
+        if ( rook != null ) {
+            rook.xcoord = 2;
+            rook.ycoord = 7;
+        }
+    }
+
+    else if ( piece.xcoord == 5 && piece.ycoord == 7 ) { // black queen side castle
+        let rook = returnPieceAt(7,7);
+
+        if ( rook != null ) {
+            rook.xcoord = 4;
+            rook.ycoord = 7;
+        }
+    }
+}
+
+function checkIfBlackRookCanCastle ( xcoord, ycoord ) {
+    let canCastle = false; 
+    board.blackPieces.forEach( function(piece) {
+        if (piece.xcoord == xcoord && piece.ycoord == ycoord) {
+            if ( piece instanceof rook && piece.firstMove == true ){
+                canCastle = true;
+            }
+        }
+    });
+
+    return canCastle;
+}
+
+function checkIfWhiteRookCanCastle ( xcoord, ycoord ) {
+    let canCastle = false;
+    board.whitePieces.forEach( function(piece) {
+        if (piece.xcoord == xcoord && piece.ycoord == ycoord) {
+            if ( piece instanceof rook && piece.firstMove == true ){
+                canCastle = true;
+            }
+        }
+    });
+
+    return canCastle;
+}
+
+function returnPieceAt (xcoord, ycoord) {
+    let piece = null;
+
+    board.whitePieces.forEach( function (element) {
+        if( element.xcoord == xcoord && element.ycoord == ycoord ) {
+            piece = element;
+        }
+    })
+
+    board.blackPieces.forEach( function (element) {
+        if( element.xcoord == xcoord && element.ycoord == ycoord ) {
+            piece = element;
+        }
+    })
+
+
+    return piece;
+}
+
+

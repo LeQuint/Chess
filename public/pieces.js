@@ -18,7 +18,42 @@ class king extends piece {
     }
 
     generateValidMoves() {
+        // Checking for Castle
+        if ( this.firstMove == true && !checkIfKingIsInDanger(this, this.xcoord, this.ycoord)) {
+            if ( this.pieceColor == "white" ) {
+                if ( checkIfWhiteRookCanCastle(0,0) ) { // left rook
+                    if ( !checkIfPieceIsHere(1,0) && !checkIfPieceIsHere(2,0) && !checkIfKingIsInDanger(this, this.xcoord - 2, this.ycoord)) {
+                        possibleCastle = true;
+                        possibleMoves.push({x: this.xcoord - 2, y: this.ycoord});
+                    }
+                }
 
+                if ( checkIfWhiteRookCanCastle(7,0) ) { // right rook
+                    if ( !checkIfPieceIsHere(4,0) && !checkIfPieceIsHere(5,0) && !checkIfPieceIsHere(6,0) && !checkIfKingIsInDanger(this, this.xcoord + 2, this.ycoord)) {
+                        possibleCastle = true;
+                        possibleMoves.push({x: this.xcoord + 2, y: this.ycoord});
+                    }
+                }
+            }
+
+            else if ( this.pieceColor == "black" && !checkIfKingIsInDanger(this, this.xcoord, this.ycoord)) {
+                if ( checkIfBlackRookCanCastle(0,7) ) { // left rook
+                    if ( !checkIfPieceIsHere(1,7) && !checkIfPieceIsHere(2,7) && !checkIfKingIsInDanger(this, this.xcoord - 2, this.ycoord)) {
+                        possibleCastle = true;
+                        possibleMoves.push({x: this.xcoord - 2, y: this.ycoord});
+                    }
+                }
+
+                if ( checkIfBlackRookCanCastle(7,7) ) { // right rook
+                    if ( !checkIfPieceIsHere(4,7) && !checkIfPieceIsHere(5,7) && !checkIfPieceIsHere(6,7) && !checkIfKingIsInDanger(this, this.xcoord + 2, this.ycoord)) {
+                        possibleCastle = true;
+                        possibleMoves.push({x: this.xcoord + 2, y: this.ycoord});
+                    }
+                }
+            }
+        }
+
+        // Generating regular moves
         if( this.xcoord + 1 < 8 && this.ycoord + 1 < 8) {
             if ( this.pieceColor == 'white' ) {
                 if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord + 1)) {
@@ -28,7 +63,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord + 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord + 1, this.ycoord + 1)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord + 1, this.ycoord + 1))
                         possibleMoves.push({x: this.xcoord + 1, y: this.ycoord + 1});
                 }
@@ -44,7 +79,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord - 1, this.ycoord + 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord - 1, this.ycoord + 1)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord - 1, this.ycoord + 1))
                         possibleMoves.push({x: this.xcoord - 1, y: this.ycoord + 1});
                 }
@@ -60,7 +95,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord - 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord + 1, this.ycoord - 1)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord + 1, this.ycoord - 1))
                         possibleMoves.push({x: this.xcoord + 1, y: this.ycoord - 1});
                 }
@@ -76,7 +111,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord - 1, this.ycoord - 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord - 1, this.ycoord - 1)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord - 1, this.ycoord - 1))
                         possibleMoves.push({x: this.xcoord - 1, y: this.ycoord - 1});
                 }
@@ -92,7 +127,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord, this.ycoord + 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord, this.ycoord + 1)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord, this.ycoord + 1))
                         possibleMoves.push({x: this.xcoord, y: this.ycoord + 1});
                 }
@@ -108,7 +143,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord, this.ycoord - 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord, this.ycoord - 1)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord, this.ycoord - 1))
                         possibleMoves.push({x: this.xcoord, y: this.ycoord - 1});
                 }
@@ -124,7 +159,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord + 1, this.ycoord)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord + 1, this.ycoord))
                         possibleMoves.push({x: this.xcoord + 1, y: this.ycoord});
                 }
@@ -140,7 +175,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord - 1, this.ycoord)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord - 1, this.ycoord)) {
                     if(!checkIfKingIsInDanger(this, this.xcoord - 1, this.ycoord))
                         possibleMoves.push({x: this.xcoord - 1, y: this.ycoord});
                 }
@@ -159,7 +194,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord + 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord + 1, this.ycoord + 1)) {
                     blackBoardControl.push({x: this.xcoord + 1, y: this.ycoord + 1});
                 }
             }
@@ -173,7 +208,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord - 1, this.ycoord + 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord - 1, this.ycoord + 1)) {
                     blackBoardControl.push({x: this.xcoord - 1, y: this.ycoord + 1});
                 }
             }
@@ -187,7 +222,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord - 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord + 1, this.ycoord - 1)) {
                     blackBoardControl.push({x: this.xcoord + 1, y: this.ycoord - 1});
                 }
             }
@@ -201,7 +236,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord - 1, this.ycoord - 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord - 1, this.ycoord - 1)) {
                     blackBoardControl.push({x: this.xcoord - 1, y: this.ycoord - 1});
                 }
             }
@@ -215,7 +250,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord, this.ycoord + 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord, this.ycoord + 1)) {
                     blackBoardControl.push({x: this.xcoord, y: this.ycoord + 1});
                 }
             }
@@ -229,7 +264,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord, this.ycoord - 1)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord, this.ycoord - 1)) {
                     blackBoardControl.push({x: this.xcoord, y: this.ycoord - 1});
                 }
             }
@@ -243,7 +278,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord + 1, this.ycoord)) {
                     blackBoardControl.push({x: this.xcoord + 1, y: this.ycoord});
                 }
             }
@@ -257,7 +292,7 @@ class king extends piece {
             }
 
             else if ( this.pieceColor == 'black') {
-                if(!checkIfWhitePieceIsHere(this.xcoord - 1, this.ycoord)) {
+                if(!checkIfBlackPieceIsHere(this.xcoord - 1, this.ycoord)) {
                     blackBoardControl.push({x: this.xcoord - 1, y: this.ycoord});
                 }
             }

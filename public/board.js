@@ -8,7 +8,9 @@ class Board{
      this.setupPieces();
     }
     setupPieces() {
-        this.whitePieces.push( new king ( 4, 0, loadImage( 'images/wKing.png' ), "white"));
+        this.whitePieces.push( new king ( 3, 0, loadImage( 'images/wKing.png' ), "white"));
+        this.whitePieces.push( new rook ( 0, 0, loadImage( 'images/wRook.png' ), "white"));
+        this.whitePieces.push( new rook ( 7, 0, loadImage( 'images/wRook.png' ), "white"));
         this.whitePieces.push( new pawn ( 0, 1, loadImage( 'images/wPawn.png' ), "white"));
         this.whitePieces.push( new pawn ( 1, 1, loadImage( 'images/wPawn.png' ), "white"));
         this.whitePieces.push( new pawn ( 2, 1, loadImage( 'images/wPawn.png' ), "white"));
@@ -17,15 +19,15 @@ class Board{
         this.whitePieces.push( new pawn ( 5, 1, loadImage( 'images/wPawn.png' ), "white"));
         this.whitePieces.push( new pawn ( 6, 1, loadImage( 'images/wPawn.png' ), "white"));
         this.whitePieces.push( new pawn ( 7, 1, loadImage( 'images/wPawn.png' ), "white"));
-        this.whitePieces.push( new rook ( 0, 0, loadImage( 'images/wRook.png' ), "white"));
         this.whitePieces.push( new knight ( 1, 0, loadImage( 'images/wKnight.png' ), "white"));
         this.whitePieces.push( new bishop ( 2, 0, loadImage( 'images/wBishop.png' ), "white"));
-        this.whitePieces.push( new queen ( 3, 0, loadImage( 'images/wQueen.png' ), "white"));
+        this.whitePieces.push( new queen ( 4, 0, loadImage( 'images/wQueen.png' ), "white"));
         this.whitePieces.push( new bishop ( 5, 0, loadImage( 'images/wBishop.png' ), "white"));
         this.whitePieces.push( new knight ( 6, 0, loadImage( 'images/wKnight.png' ), "white"));
-        this.whitePieces.push( new rook ( 7, 0, loadImage( 'images/wRook.png' ), "white"));
         
-        this.blackPieces.push( new king ( 4, 7, loadImage( 'images/bKing.png' ), "black"));
+        this.blackPieces.push( new king ( 3, 7, loadImage( 'images/bKing.png' ), "black"));
+        this.blackPieces.push( new rook ( 0, 7, loadImage( 'images/bRook.png' ), "black"));
+        this.blackPieces.push( new rook ( 7, 7, loadImage( 'images/bRook.png' ), "black"));
         this.blackPieces.push( new pawn ( 0, 6, loadImage( 'images/bPawn.png' ), "black"));
         this.blackPieces.push( new pawn ( 1, 6, loadImage( 'images/bPawn.png' ), "black"));
         this.blackPieces.push( new pawn ( 2, 6, loadImage( 'images/bPawn.png' ), "black"));
@@ -34,15 +36,12 @@ class Board{
         this.blackPieces.push( new pawn ( 5, 6, loadImage( 'images/bPawn.png' ), "black"));
         this.blackPieces.push( new pawn ( 6, 6, loadImage( 'images/bPawn.png' ), "black"));
         this.blackPieces.push( new pawn ( 7, 6, loadImage( 'images/bPawn.png' ), "black"));
-        this.blackPieces.push( new rook ( 0, 7, loadImage( 'images/bRook.png' ), "black"));
         this.blackPieces.push( new knight ( 1, 7, loadImage( 'images/bKnight.png' ), "black"));
         this.blackPieces.push( new bishop ( 2, 7, loadImage( 'images/bBishop.png' ), "black"));
-        this.blackPieces.push( new queen ( 3, 7, loadImage( 'images/bQueen.png' ), "black"));
+        this.blackPieces.push( new queen ( 4, 7, loadImage( 'images/bQueen.png' ), "black"));
         this.blackPieces.push( new bishop ( 5, 7, loadImage( 'images/bBishop.png' ), "black"));
         this.blackPieces.push( new knight ( 6, 7, loadImage( 'images/bKnight.png' ), "black"));
-        this.blackPieces.push( new rook ( 7, 7, loadImage( 'images/bRook.png' ), "black"));
-
-        console.log("finished initializing board");
+        
     }
 }
 
