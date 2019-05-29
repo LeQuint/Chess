@@ -15,10 +15,7 @@ function draw() {
 function mousePressed(){
     let currentPiece = getPieceAt( mouseX, mouseY );
     
-    if( currentPiece != null )
-        currentPiece.generateValidMoves();
-    
-    /*if( currentPiece != null ) {
+    if( currentPiece != null ) {
         if ( turnBit == true && currentPiece.pieceColor == 'white') { // white move
             currentPiece.generateValidMoves();
         }
@@ -26,7 +23,7 @@ function mousePressed(){
         else if ( turnBit == false && currentPiece.pieceColor == 'black') { // black move
             currentPiece.generateValidMoves();
         }
-    }*/
+    }
 }
 
 function mouseReleased(){
