@@ -14,10 +14,19 @@ function draw() {
 
 function mousePressed(){
     let currentPiece = getPieceAt( mouseX, mouseY );
-
-    if( currentPiece != null ) {
+    
+    if( currentPiece != null )
         currentPiece.generateValidMoves();
-    }
+    
+    /*if( currentPiece != null ) {
+        if ( turnBit == true && currentPiece.pieceColor == 'white') { // white move
+            currentPiece.generateValidMoves();
+        }
+
+        else if ( turnBit == false && currentPiece.pieceColor == 'black') { // black move
+            currentPiece.generateValidMoves();
+        }
+    }*/
 }
 
 function mouseReleased(){
@@ -36,6 +45,12 @@ function releasePiece() {
             currentPiece.xcoord = floor(mouseX/TILESIZE);
             currentPiece.ycoord = floor(mouseY/TILESIZE);
 
+            if ( currentPiece instanceof pawn) {
+                if ( currentPiece.ycoord == 7 ) {
+                    evolve(currentPiece, board.indexBeingMoved);
+                }
+            }
+
             if ( possibleCastle == true ) {
                 castleLogic(currentPiece);
             }
@@ -50,12 +65,20 @@ function releasePiece() {
             board.colorBeingMoved = null;
 
             checkIfWhiteHasWon();
+            turnBit = false;
         }
+        
         else if ( board.colorBeingMoved == "black" ) {
             let currentPiece = board.blackPieces[board.indexBeingMoved];
             currentPiece.beingMoved = false;
             currentPiece.xcoord = floor(mouseX/TILESIZE);
             currentPiece.ycoord = floor(mouseY/TILESIZE);
+
+            if ( currentPiece instanceof pawn) {
+                if ( currentPiece.ycoord == 0 ) {
+                    evolve(currentPiece, board.indexBeingMoved);
+                }
+            }
 
             if ( possibleCastle == true ) {
                 castleLogic(currentPiece);
@@ -71,6 +94,7 @@ function releasePiece() {
             board.colorBeingMoved = null;
 
             checkIfBlackHasWon();
+            turnBit = true;
         }
     }
 

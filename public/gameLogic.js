@@ -2,6 +2,7 @@ const TILESIZE = 100; // size of tile in px
 
 let board;
 let possibleCastle = false;
+let turnBit = true;
 let possibleMoves = [];
 let whiteBoardControl = [];
 let blackBoardControl = [];
@@ -95,13 +96,13 @@ function checkIfMovingThrough( posX, posY , destX, destY) {
 
 function checkIfPieceIsHere(xcoord, ycoord) {
     for ( let i = 0; i < board.whitePieces.length; i++ ) {
-        if ( board.whitePieces[i].xcoord == xcoord && board.whitePieces[i].ycoord == ycoord ) {
+        if ( board.whitePieces[i].xcoord == xcoord && board.whitePieces[i].ycoord == ycoord && board.whitePieces[i].mute != true ) {
             return true;
         }
     }
 
     for( let j = 0 ; j < board.blackPieces.length; j++ ) {
-        if ( board.blackPieces[j].xcoord == xcoord && board.blackPieces[j].ycoord == ycoord ) {
+        if ( board.blackPieces[j].xcoord == xcoord && board.blackPieces[j].ycoord == ycoord && board.blackPieces[j].mute == false ) {
             return true;
         }
     }
@@ -111,7 +112,7 @@ function checkIfPieceIsHere(xcoord, ycoord) {
 
 function checkIfBlackPieceIsHere(xcoord, ycoord) {
     for( let j = 0 ; j < board.blackPieces.length; j++ ) {
-        if ( board.blackPieces[j].xcoord == xcoord && board.blackPieces[j].ycoord == ycoord ) {
+        if ( board.blackPieces[j].xcoord == xcoord && board.blackPieces[j].ycoord == ycoord && board.blackPieces[j].mute == false ) {
             return true;
         }
     }
@@ -121,7 +122,7 @@ function checkIfBlackPieceIsHere(xcoord, ycoord) {
 
 function checkIfWhitePieceIsHere(xcoord, ycoord) {
     for ( let i = 0; i < board.whitePieces.length; i++ ) {
-        if ( board.whitePieces[i].xcoord == xcoord && board.whitePieces[i].ycoord == ycoord ) {
+        if ( board.whitePieces[i].xcoord == xcoord && board.whitePieces[i].ycoord == ycoord && board.whitePieces[i].mute == false ) {
             return true;
         }
     }
@@ -235,6 +236,8 @@ function checkIfKingIsInDanger (piece, destX, destY) {
 }
 
 function checkIfWhiteHasWon () {
+    possibleMoves = [];
+    
     board.blackPieces.forEach( function(piece) {
         piece.generateValidMoves();
     });
@@ -353,6 +356,23 @@ function returnPieceAt (xcoord, ycoord) {
 
 
     return piece;
+}
+
+function evolve(pawn, index) {
+
+    let xcoord = pawn.xcoord;
+    let ycoord = pawn.ycoord;
+
+    if (pawn.pieceColor == 'white') {
+        board.whitePieces[index] = null;
+        board.whitePieces[index] = new queen ( xcoord, ycoord, loadImage( 'images/wQueen.png' ), "white")
+    }
+
+    else if (pawn.pieceColor == 'black' ) {
+        board.blackPieces[index] = null;
+        board.blackPieces[index] = new queen ( xcoord, ycoord, loadImage( 'images/bQueen.png' ), "black")
+    }
+
 }
 
 

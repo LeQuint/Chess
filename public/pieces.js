@@ -185,7 +185,6 @@ class king extends piece {
     }
 
     generateBoardControl() {
-
         if( this.xcoord + 1 < 8 && this.ycoord + 1 < 8) {
             if ( this.pieceColor == 'white' ) {
                 if(!checkIfWhitePieceIsHere(this.xcoord + 1, this.ycoord + 1)) {
