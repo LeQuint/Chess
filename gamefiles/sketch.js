@@ -1,6 +1,7 @@
 
 function setup() {
-    createCanvas( 800, 800 );
+    var canvas = createCanvas( 800, 800 );
+    canvas.parent('sketch-holder');
     board = new Board();
     possibleMoves = [];
 }
