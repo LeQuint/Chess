@@ -2,6 +2,7 @@ var time = 0;
 var dataBuffer = [];
 var synchronizedTick;
 var framesPerSec;
+var playerColorPreference;
 
 function beginSynchronization() {
     if (isInitiator) {

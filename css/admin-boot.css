@@ -12058,4 +12058,14 @@
   body.sidebar-toggled footer.sticky-footer {
     width: 100%;
   }
+
+  .ul-game-menu {
+    width: 100%;
+    margin-left: auto; 
+    margin-right: auto; 
+    clear: left;
+    padding: 0;
+    text-align: center;
+    list-style-type:none;
+  }
   

@@ -1,12 +1,20 @@
 // TODO: Find a better way to scope/link modules
-var signalSocket = new WebSocket("ws://localhost:8080");
+var signalSocket = new WebSocket("ws://localhost:3000");
 var room = 'foo';
+var roomName;
 
 function sendMessage(msgType, room, message) {
   var package = Object.assign(msgType, room, message);
   console.log("Sending through socket: ", package);
   signalSocket.send(JSON.stringify({package}));
 }
+
+function joinRoom() {
+  roomName = document.getElementById("roomNameInput").value;
+  let select = document.getElementById('playerColorID');
+  playerColorPreference = select.options[select.selectedIndex].value;
+  sendMessage({msgType: "join"}, {room: roomName}, {});
+};
 
 signalSocket.onopen = function (event) {
   // Hook up listeners
@@ -19,18 +27,23 @@ signalSocket.onmessage = function (event) {
   console.log("Received message from server ", message);
   switch (message.msgType) {
     case "full":
-      console.log('Room ' + room + ' is full');
+      console.log('Room ' + room + '  is full');
       break;
 
     case "joined":
       let numConnections = message.numConnections
       if (numConnections == 1) {
-        // Created
+        // Created a room
         console.log(`${room} has ${numConnections} clients`);
         isInitiator = true;
       } else {
         console.log(`${room} has ${numConnections} clients`);
         isChannelReady = true;
+
+        // Initiate connection message to server
+        if (isInitiator) {
+          sendMessage( {msgType: "message"}, {room: roomName}, {msg: 'connect'});
+        }
       }
       break;
 
@@ -49,6 +62,9 @@ var messageHandler = function (message) {
   console.log('Client received message:', message.msg);
 
   if (message.msg === 'connect') {
+    if (!isInitiator) {
+      sendMessage( {msgType: "message"}, {room: roomName}, {msg: 'connect'});
+    }
     maybeStart();
   } else if (message.type === 'offer') {
     if (!isInitiator && !isStarted) {

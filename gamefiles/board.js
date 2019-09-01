@@ -49,7 +49,7 @@ function drawBoard () {
         for( var i = 0; i < 8; i++ ){
             for( var j = 0; j < 8; j++ ){
                 if(( i+j ) % 2 == 0){
-                    fill(250);
+                    fill(230);
                 }
                 else {
                     fill(0);

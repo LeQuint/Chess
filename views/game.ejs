@@ -14,15 +14,29 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-              <!-- Load Game  -->
-              <div id="sketch-holder"><!-- sketch goes here! --></div>
-              <script src = "/gamefiles/libraries/p5.js"></script>
-              <script src = "/gamefiles/libraries/p5.dom.js"></script>
-              <script src = "/gamefiles/gameLogic.js"></script>
-              <script src = "/gamefiles/board.js"></script>
-              <script src = "/gamefiles/pieces.js"></script>
-              <script src = "/gamefiles/sketch.js"></script>
-    
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary"> Multiplayer </h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle btn-primary shadow-sm btn btn-sm d-sm-inline-block" href="#" role="button" id="MenuLink" data-toggle="modal" data-target="#menuModal" aria-haspopup="true" aria-expanded="false">
+                      <span class="mr-2 d-none d-lg-inline"> Menu </span>
+                      <i class="fas fa-bars fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Setting:</div>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#joinRoomModal"> Join Room </a>
+                      <a class="dropdown-item" href="#"> Surrender </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div id="sketch-holder"><!-- sketch goes here! --></div>
+                  </div>
+                </div>
+              </div>  
             </div>
             <!-- /.container-fluid -->
     
@@ -49,6 +63,28 @@
       <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
       </a>
+
+      <!-- Menu Model -->
+      <% include ./partials/menuModal %>
     
-      <!-- Logout Modal-->
-      <% include ./partials/logoutModel %>
+      <!-- Logout Model-->
+      <% include ./partials/logoutModal %>
+
+      <!-- Join Room Model -->
+      <% include ./partials/joinRoomModal %>
+
+      <div>
+        <!-- Load Game  -->
+        <script src = "/RTC/socket.js"></script>
+        <script src = "/RTC/rtc.js"></script>
+        <script src = "/RTC/synchronization.js"></script>
+        <script src = "/gamefiles/libraries/p5.js"></script>
+        <script src = "/gamefiles/libraries/p5.dom.js"></script>
+        <script src = "/gamefiles/gameLogic.js"></script>
+        <script src = "/gamefiles/board.js"></script>
+        <script src = "/gamefiles/pieces.js"></script>
+        <script src = "/gamefiles/sketch.js"></script>
+        <script type="text/javascript">
+          document.getElementById("MenuLink").click();
+        </script>
+      </div>

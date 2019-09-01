@@ -1,0 +1,29 @@
+<!-- Join Room Modal-->
+<div class="modal fade" id="joinRoomModal" tabindex="-1" role="dialog" aria-labelledby="joinRoomModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Please enter room name</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="text" class="form-control" id="roomNameInput" aria-describedby="emailHelp" placeholder="Room Name">
+            </div>
+            
+            <p>Which color would you like to play? </p>
+            <select class="browser-default custom-select" id="playerColorID">
+                <option value="1">Black</option>
+                <option value="2">White</option>
+                <option value="3" selected>No Preference</option>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href=# onclick="joinRoom()" data-dismiss="modal">Join Room</a>
+        </div>
+        </div>
+    </div>
+</div>

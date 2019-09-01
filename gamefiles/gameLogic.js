@@ -1,4 +1,4 @@
-const TILESIZE = 100; // size of tile in px
+const TILESIZE = 95; // size of tile in px
 
 let board;
 let possibleCastle = false;
@@ -6,6 +6,7 @@ let turnBit = true;
 let possibleMoves = [];
 let whiteBoardControl = [];
 let blackBoardControl = [];
+let playerColor = 'black';
 
 
 function checkValidMove() {

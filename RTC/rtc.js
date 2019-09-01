@@ -3,6 +3,7 @@
 var isChannelReady = false;
 var isInitiator = false;
 var isStarted = false;
+var isConnected = false;
 var pc;
 var turnReady;
 
@@ -35,7 +36,10 @@ function maybeStart() {
 }
 
 window.onbeforeunload = function() {
-  sendMessage({msgType: "message"}, {room: roomName}, {msg: 'bye'});
+  if(isConnected) {
+    sendMessage({msgType: "message"}, {room: roomName}, {msg: 'bye'});
+    isConnected = false;
+  }
 };
 
 function createPeerConnection() {
@@ -146,6 +150,7 @@ function onSendChannelStateChange() {
   var readyState = sendChannel.readyState;
   console.log('Send channel state is: ' + readyState);
   if (readyState === 'open') {
+    isConnected = true;
     beginSynchronization();
   } else {
     stopSync();
@@ -155,7 +160,10 @@ function onSendChannelStateChange() {
 function hangup() {
   console.log('Hanging up.');
   stop();
-  sendMessage({msgType: "message"}, {room: roomName}, {msg: 'bye'});
+  if(isConnected) {
+    sendMessage({msgType: "message"}, {room: roomName}, {msg: 'bye'});
+    isConnected = false;
+  }
 }
 
 function handleRemoteHangup() {

@@ -54,6 +54,7 @@ app.use('/gamefiles', express.static(__dirname + "/gamefiles"));
 app.use('/images', express.static(__dirname + "/gamefiles/images"));
 app.use('/js', express.static(__dirname + "/js"));
 app.use('/css', express.static(__dirname + "/css"));
+app.use('/RTC', express.static(__dirname + "/RTC"));
 
 const port = process.env.PORT || 8080;        // set our port
 

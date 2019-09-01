@@ -1,15 +1,20 @@
-
 function setup() {
-    var canvas = createCanvas( 800, 800 );
+    var canvas = createCanvas( TILESIZE * 8, TILESIZE * 8 );
     canvas.parent('sketch-holder');
     board = new Board();
-    possibleMoves = [];
+    noLoop();
 }
 
 function draw() {
+
     drawBoard();
     drawPieces ( board );
     drawValidMoves();
+}
+
+function startGame() {
+    possibleMoves = [];
+    loop();
 }
 
 
