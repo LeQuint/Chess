@@ -6,7 +6,7 @@ let turnBit = true;
 let possibleMoves = [];
 let whiteBoardControl = [];
 let blackBoardControl = [];
-let playerColor = 'black';
+let playerColor;
 
 
 function checkValidMove() {
@@ -284,6 +284,8 @@ function castleLogic (piece) {
             rook.xcoord = 2;
             rook.ycoord = 0;
         }
+
+        sendData('castleMove', 'WKside');
     }
 
     else if ( piece.xcoord == 5 && piece.ycoord == 0 ) { // white queen side castle
@@ -293,6 +295,8 @@ function castleLogic (piece) {
             rook.xcoord = 4;
             rook.ycoord = 0;
         }
+
+        sendData('castleMove', 'WQside');
     }
 
     else if ( piece.xcoord == 1 && piece.ycoord == 7 ) { // black king side castle
@@ -302,9 +306,45 @@ function castleLogic (piece) {
             rook.xcoord = 2;
             rook.ycoord = 7;
         }
+
+        sendData('castleMove', 'BKside');
     }
 
     else if ( piece.xcoord == 5 && piece.ycoord == 7 ) { // black queen side castle
+        let rook = returnPieceAt(7,7);
+
+        if ( rook != null ) {
+            rook.xcoord = 4;
+            rook.ycoord = 7;
+        }
+
+        sendData('castleMove', 'BQside');
+    }
+}
+
+function opponentCastle(castleType) {
+    if (castleType == 'WKside') {
+        let rook = returnPieceAt(0,0);
+
+        if ( rook != null ) {
+            rook.xcoord = 2;
+            rook.ycoord = 0;
+        }
+    } else if ( castleType == 'WQside') {
+        let rook = returnPieceAt(7,0);
+
+        if ( rook != null ) {
+            rook.xcoord = 4;
+            rook.ycoord = 0;
+        }
+    } else if ( castleType == 'BKside') {
+        let rook = returnPieceAt(0,7);
+
+        if ( rook != null ) {
+            rook.xcoord = 2;
+            rook.ycoord = 7;
+        }
+    } else if ( castleType == 'BQside') {
         let rook = returnPieceAt(7,7);
 
         if ( rook != null ) {
@@ -374,6 +414,35 @@ function evolve(pawn, index) {
         board.blackPieces[index] = new queen ( xcoord, ycoord, loadImage( 'images/bQueen.png' ), "black")
     }
 
+}
+
+function evolvePawnAt(coordX, coordY, index) {
+    let pawn = returnPieceAt(coordX, coordY);
+    evolve(pawn, index);
+}
+
+function movePieceToPosition(orgX, orgY, destX, destY) {
+    for ( let i = 0; i < board.whitePieces.length; i++ ) {
+        if ( board.whitePieces[i].xcoord == orgX && board.whitePieces[i].ycoord == orgY) {
+            board.whitePieces[i].xcoord = destX;
+            board.whitePieces[i].ycoord = destY;
+            removeBlackPieceAt(destX, destY);
+            turnBit = !turnBit;
+            console.log('moved white piece')
+            return;
+        }
+    }
+
+    for( let j = 0 ; j < board.blackPieces.length; j++ ) {
+        if ( board.blackPieces[j].xcoord == orgX && board.blackPieces[j].ycoord == orgY) {
+            board.blackPieces[j].xcoord = destX;
+            board.blackPieces[j].ycoord = destY;
+            removeWhitePieceAt(destX, destY);
+            turnBit = !turnBit;
+            console.log('moved black piece')
+            return;
+        }
+    }
 }
 
 

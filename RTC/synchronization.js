@@ -24,31 +24,76 @@ function sendData(type,value) {
 function receivedData(event) {
     var dataPackage = JSON.parse(event.data);
     //console.log("received package: ", dataPackage);
-  
     switch (dataPackage.msgType) {
         case "initSync":
             setTime(dataPackage.data);
         break;
 
-        case "humanPosX":
-            humanPosX = dataPackage.data;
+        case "initGame":
+            configurePlayerColor(dataPackage.data);
         break;
 
-        case "humanPosY":
-            humanPosY = dataPackage.data;
+        case "Color":
+            playerColor = dataPackage.data;
+            loop();
         break;
 
-        case "ghostPosX":
-            ghostPosX = dataPackage.data;
+        case "movePiece":
+            movePieceToPosition(dataPackage.data.orgX, dataPackage.data.orgY, dataPackage.data.destX, dataPackage.data.destY);
         break;
 
-        case "ghostPosY":
-            ghostPosY = dataPackage.data;
+        case "castleMove":
+            opponentCastle(dataPackage.data);
         break;
-  
+
+        case "evolveMove":
+            evolvePawnAt(dataPackage.data.coordX, dataPackage.data.coordY, dataPackage.data.index);
+        break;
+
         default:
         break;
     }
+}
+
+function configurePlayerColor(otherPlayerColorChoice) {
+    if( otherPlayerColorChoice == "1" && playerColorPreference == "1" ) { // both have no preference
+        playerColor = "black"
+        sendData('Color', 'white');
+    } 
+    else if ( otherPlayerColorChoice == "1" && playerColorPreference != "1" ){
+        if ( playerColorPreference == 2 ){
+            playerColor = "black"
+            sendData('Color', 'white');
+        } else {
+            playerColor = "white"
+            sendData('Color', 'black');
+        }
+    }
+    else if ( otherPlayerColorChoice != "1" && playerColorPreference == "1" ) {
+        if ( otherPlayerColorChoice == 2 ){
+            playerColor = "white"
+            sendData('Color', 'black');
+        } else {
+            playerColor = "black"
+            sendData('Color', 'white');
+        }
+    }
+    else if ( otherPlayerColorChoice != playerColorPreference ) { // different choices
+        if( playerColorPreference == 2) {
+            playerColor = "black"
+            sendData('Color', 'white');
+        } else {
+            playerColor = "white"
+            sendData('Color', 'black');
+        }
+    }
+    else if ( otherPlayerColorChoice == playerColorPreference ) { // same choice
+        playerColor = "white"
+        sendData('Color', 'black');
+    }
+
+    console.log("begin game ...");
+    loop(); // begin game
 }
 
 function setAndSendTime() {
@@ -86,7 +131,7 @@ function startSync() {
 function stopSync() {
     clearInterval(synchronizedTick);
     clearInterval(framesPerSec);
-    noloop();
+    noLoop();
     time = 0;
     dataBuffer = [];
 }

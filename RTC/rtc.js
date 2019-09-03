@@ -23,12 +23,12 @@ if (location.hostname !== 'localhost') {
 }
 
 function maybeStart() {
-  console.log('>>>>>>> maybeStart() ', isStarted, isChannelReady);
+  // console.log('>>>>>>> maybeStart() ', isStarted, isChannelReady);
   if (!isStarted && isChannelReady) { 
-    console.log('>>>>>> creating peer connection');
+    // console.log('>>>>>> creating peer connection');
     createPeerConnection();
     isStarted = true;
-    console.log('isInitiator', isInitiator);
+    // console.log('isInitiator', isInitiator);
     if (isInitiator) {
       doCall();
     }
@@ -47,23 +47,23 @@ function createPeerConnection() {
     pc = new RTCPeerConnection(null);
     pc.onicecandidate = handleIceCandidate;
     pc.ondatachannel = handleReceiveChannel;
-    console.log('Created RTCPeerConnnection');
+    // console.log('Created RTCPeerConnnection');
 
     var dataConstraint = null;
     sendChannel = pc.createDataChannel('sendDataChannel', dataConstraint);
     sendChannel.onopen = onSendChannelStateChange;
     sendChannel.onclose = onSendChannelStateChange;
-    console.log('Created data channel');
+    // console.log('Created data channel');
 
   } catch (e) {
-    console.log('Failed to create PeerConnection, exception: ' + e.message);
+    // console.log('Failed to create PeerConnection, exception: ' + e.message);
     alert('Cannot create RTCPeerConnection object.');
     return;
   }
 }
 
 function handleIceCandidate(event) {
-  console.log('icecandidate event: ', event);
+  // console.log('icecandidate event: ', event);
   if (event.candidate) {
     sendMessage( {msgType: 'message'}, {room: roomName},
     {
@@ -73,21 +73,21 @@ function handleIceCandidate(event) {
       candidate: event.candidate.candidate
     });
   } else {
-    console.log('End of candidates.');
+    // console.log('End of candidates.');
   }
 }
 
 function handleCreateOfferError(event) {
-  console.log('createOffer() error: ', event);
+  // console.log('createOffer() error: ', event);
 }
 
 function doCall() {
-  console.log('Sending offer to peer');
+  // console.log('Sending offer to peer');
   pc.createOffer(setLocalAndSendMessage, handleCreateOfferError);
 }
 
 function doAnswer() {
-  console.log('Sending answer to peer.');
+  // console.log('Sending answer to peer.');
   pc.createAnswer().then(
     setLocalAndSendMessage,
     onCreateSessionDescriptionError
@@ -96,7 +96,7 @@ function doAnswer() {
 
 function setLocalAndSendMessage(sessionDescription) {
   pc.setLocalDescription(sessionDescription);
-  console.log('setLocalAndSendMessage sending message', sessionDescription);
+  // console.log('setLocalAndSendMessage sending message', sessionDescription);
   sendMessage({msgType: 'message'}, {room: roomName}, {sdp: sessionDescription.sdp, type: sessionDescription.type});
 }
 
@@ -114,13 +114,13 @@ function requestTurn(turnURL) {
     }
   }
   if (!turnExists) {
-    console.log('Getting TURN server from ', turnURL);
+    // console.log('Getting TURN server from ', turnURL);
     // No TURN server. Get one from computeengineondemand.appspot.com:
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         var turnServer = JSON.parse(xhr.responseText);
-        console.log('Got TURN server: ', turnServer);
+        // console.log('Got TURN server: ', turnServer);
         pcConfig.iceServers.push({
           'urls': 'turn:' + turnServer.username + '@' + turnServer.turn,
           'credential': turnServer.password
@@ -134,7 +134,7 @@ function requestTurn(turnURL) {
 }
 
 function handleReceiveChannel(event) {
-  console.log ('Receive Channel Callback');
+  // console.log ('Receive Channel Callback');
   receiveChannel = event.channel;
   receiveChannel.onmessage = receivedData;
   receiveChannel.onopen = onReceiveChannelStateChange;
@@ -158,7 +158,7 @@ function onSendChannelStateChange() {
 }
 
 function hangup() {
-  console.log('Hanging up.');
+  // console.log('Hanging up.');
   stop();
   if(isConnected) {
     sendMessage({msgType: "message"}, {room: roomName}, {msg: 'bye'});

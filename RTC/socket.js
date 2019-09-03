@@ -1,11 +1,10 @@
 // TODO: Find a better way to scope/link modules
 var signalSocket = new WebSocket("ws://localhost:3000");
-var room = 'foo';
 var roomName;
 
 function sendMessage(msgType, room, message) {
   var package = Object.assign(msgType, room, message);
-  console.log("Sending through socket: ", package);
+  // console.log("Sending through socket: ", package);
   signalSocket.send(JSON.stringify({package}));
 }
 
@@ -24,7 +23,7 @@ signalSocket.onopen = function (event) {
 signalSocket.onmessage = function (event) {
   let message = JSON.parse(event.data);
   let room = message.room;
-  console.log("Received message from server ", message);
+  // console.log("Received message from server ", message);
   switch (message.msgType) {
     case "full":
       console.log('Room ' + room + '  is full');
@@ -59,7 +58,7 @@ signalSocket.onmessage = function (event) {
 
 // This client receives a message
 var messageHandler = function (message) {
-  console.log('Client received message:', message.msg);
+  // console.log('Client received message:', message.msg);
 
   if (message.msg === 'connect') {
     if (!isInitiator) {

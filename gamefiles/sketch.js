@@ -14,7 +14,10 @@ function draw() {
 
 function startGame() {
     possibleMoves = [];
-    loop();
+    // decide who is playing which color
+    if (isInitiator) {
+        sendData('initGame', playerColorPreference);
+    } 
 }
 
 
@@ -22,11 +25,11 @@ function mousePressed(){
     let currentPiece = getPieceAt( mouseX, mouseY );
     
     if( currentPiece != null ) {
-        if ( turnBit == true && currentPiece.pieceColor == 'white') { // white move
+        if ( turnBit == true && currentPiece.pieceColor == 'white' && playerColor == 'white') { // white move
             currentPiece.generateValidMoves();
         }
 
-        else if ( turnBit == false && currentPiece.pieceColor == 'black') { // black move
+        else if ( turnBit == false && currentPiece.pieceColor == 'black' && playerColor == 'black') { // black move
             currentPiece.generateValidMoves();
         }
     }
@@ -45,12 +48,16 @@ function releasePiece() {
         if (board.colorBeingMoved == "white") {
             let currentPiece = board.whitePieces[board.indexBeingMoved];
             currentPiece.beingMoved = false;
+
+            sendData('movePiece', {orgX: currentPiece.xcoord, orgY: currentPiece.ycoord, destX: floor(mouseX/TILESIZE), destY: floor(mouseY/TILESIZE)});
+
             currentPiece.xcoord = floor(mouseX/TILESIZE);
             currentPiece.ycoord = floor(mouseY/TILESIZE);
 
             if ( currentPiece instanceof pawn) {
                 if ( currentPiece.ycoord == 7 ) {
                     evolve(currentPiece, board.indexBeingMoved);
+                    sendData('evolveMove', {coordX: currentPiece.xcoord, coordY: currentPiece.ycoord, index: board.indexBeingMoved});
                 }
             }
 
@@ -74,12 +81,16 @@ function releasePiece() {
         else if ( board.colorBeingMoved == "black" ) {
             let currentPiece = board.blackPieces[board.indexBeingMoved];
             currentPiece.beingMoved = false;
+
+            sendData('movePiece', {orgX: currentPiece.xcoord, orgY: currentPiece.ycoord, destX: floor(mouseX/TILESIZE), destY: floor(mouseY/TILESIZE)});
+
             currentPiece.xcoord = floor(mouseX/TILESIZE);
             currentPiece.ycoord = floor(mouseY/TILESIZE);
 
             if ( currentPiece instanceof pawn) {
                 if ( currentPiece.ycoord == 0 ) {
                     evolve(currentPiece, board.indexBeingMoved);
+                    sendData('evolveMove', {coordX: currentPiece.xcoord, coordY: currentPiece.ycoord, index: board.indexBeingMoved});
                 }
             }
 
