@@ -26,17 +26,19 @@ signalSocket.onmessage = function (event) {
   // console.log("Received message from server ", message);
   switch (message.msgType) {
     case "full":
-      console.log('Room ' + room + '  is full');
+      alert('Room is full');
+      // console.log('Room ' + room + '  is full');
       break;
 
     case "joined":
       let numConnections = message.numConnections
       if (numConnections == 1) {
         // Created a room
-        console.log(`${room} has ${numConnections} clients`);
+        // console.log(`${room} has ${numConnections} clients`);
+        alert("Joined room successfully, waiting for other player ... ");
         isInitiator = true;
       } else {
-        console.log(`${room} has ${numConnections} clients`);
+        // console.log(`${room} has ${numConnections} clients`);
         isChannelReady = true;
 
         // Initiate connection message to server

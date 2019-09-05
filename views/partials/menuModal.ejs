@@ -11,18 +11,18 @@
         <div class="modal-body">
           <ul class="ul-game-menu" >
             <li class="nav-item">
-                <a class="nav-link btn-primary shadow-sm btn btn-sm" href='#' role="button" data-toggle="modal" data-target="#joinRoomModal">
-                  <span>Join Room</span></a>
+                <button type='button' class="btn btn-sm shadow-sm btn-primary menu-block" data-toggle="modal" data-target="#joinRoomModal">
+                  <span>Join Room</span></button>
               </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item">
-              <a class="nav-link btn-primary shadow-sm btn btn-sm" href='#' role="button">
-                <span>Surrender</span></a>
+              <button type="button" class="btn btn-sm shadow-sm btn-primary menu-block" id="surrenderButton" onclick="processSurrender()" disabled='disabled'>
+                <span>Surrender</span></button>
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item">
-              <a class="nav-link btn-primary shadow-sm btn btn-sm" href='#' role="button">
-                <span>Start Game </span></a>
+              <button type="button" class="btn btn-sm shadow-sm btn-primary menu-block" id="startButton" onclick="startGame()" disabled='disabled'>
+                <span>Start Game</span></button>
             </li>
           </ul>
         </div>

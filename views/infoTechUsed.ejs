@@ -1,0 +1,105 @@
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <% include ./partials/sidebar %>
+    
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+          <!-- Main Content -->
+          <div id="content">
+    
+            <% include ./partials/topbar %>
+    
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+    
+              <!-- Page Heading -->
+              <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800"> Technologies Used </h1>
+              </div>
+
+              <div class='row'>
+                  <div class="col-xl-12 col-lg-11">
+                    <p> Please visit https://github.com/LeQuint/Chess to see the code as the explanations will refer to the code base</p>
+                  </div>
+              </div>
+  
+              <div class="row">
+                <!-- Area Chart -->
+                <div class="col-xl-12 col-lg-11">
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                      <h6 class="m-0 font-weight-bold text-primary">Back-End</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                      <p> The back-end of this web app is developed using Node.js and Express. The routing through the various pages is fairly basic. I've also used Passport.js
+                        and MongoDB to store and validate user information. The server is using EJS layouts to stitch together the front-end files and display them to the user.
+                      </p>
+
+                      <p>
+                        To make the project more interesting, I've incorporated WebRTC and WebSockets as the means which users connect and share data in-game. WebRTC allows for
+                        a serverless connection between users which results in less overhead on the back-end while the game transfers real-time data. I understand this isn't a necessary 
+                        optimization since the data which needs to be conveyed in a game of chess is fairly low and would therefore be inconsequential which method of connection I used, but I figured it would be
+                        fun to learn some new technologies. I wrote the WebSocket server from stratch, handling all of the communication protocols between client and server. Normally
+                        this would all be abstracted away in higher-level socket libraries such as Socket.IO but once again, it would have taken away from a good learning opportunity.
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Area Chart -->
+                <div class="col-xl-12 col-lg-11">
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                      <h6 class="m-0 font-weight-bold text-primary">Front-End</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                      <p> The front-end is developed using a template by SB-Admin 2 which uses Bootstrap. I've learned html, css, and Bootstrap as I worked with this template
+                        as a base. The html files are generated in the back-end using EJS-layouts and partials. The layouts allowed me to create a reuseable template for all pages and the
+                        partials allowed me to add reuseable components to each page. These two features greatly reduced the amount of code needed and has made changing pieces of
+                        code a lot more manageable. The Bootstrap flexbox has also made the page responsive and has made editing the layout much easier.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+              
+              </div>
+            <!-- /.container-fluid -->
+    
+          </div>
+          <!-- End of Main Content -->
+    
+          <!-- Footer -->
+          <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+              <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Zhi Guo 2019</span>
+              </div>
+            </div>
+          </footer>
+          <!-- End of Footer -->
+    
+        </div>
+        <!-- End of Content Wrapper -->
+    
+      </div>
+      <!-- End of Page Wrapper -->
+    
+      <!-- Scroll to Top Button-->
+      <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+      </a>
+    
+      <!-- Logout Modal-->
+      <% include ./partials/logoutModal %>
+    
+  

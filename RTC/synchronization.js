@@ -50,6 +50,16 @@ function receivedData(event) {
             evolvePawnAt(dataPackage.data.coordX, dataPackage.data.coordY, dataPackage.data.index);
         break;
 
+        case "Victory":
+            registerLoss();
+            endGame();
+        break;
+
+        case "Surrender":
+            registerVictory();
+            endGame()
+        break;
+
         default:
         break;
     }
@@ -91,8 +101,6 @@ function configurePlayerColor(otherPlayerColorChoice) {
         playerColor = "white"
         sendData('Color', 'black');
     }
-
-    console.log("begin game ...");
     loop(); // begin game
 }
 
@@ -125,7 +133,7 @@ function setTime(peerStartTime) {
 function startSync() {
     synchronizedTick = setInterval(incrementTime, 1);
     framesPerSec = setInterval(synchronizeData, 100);
-    startGame();
+    document.getElementById("startButton").disabled = false;
 }
 
 function stopSync() {

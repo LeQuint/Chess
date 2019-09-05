@@ -245,7 +245,9 @@ function checkIfWhiteHasWon () {
 
     if (possibleMoves.length == 0) {
         possibleMoves = [];
-        console.log("White has won ... ");
+        registerVictory();
+        sendData('Victory', 'null');
+        endGame();
         return;
     }
 
@@ -265,7 +267,9 @@ function checkIfBlackHasWon () {
 
     if (possibleMoves.length == 0) {
         possibleMoves = [];
-        console.log("Black has won ... ");
+        registerVictory();
+        sendData('Victory', 'null');
+        endGame();
         return;
     }
 
@@ -428,7 +432,6 @@ function movePieceToPosition(orgX, orgY, destX, destY) {
             board.whitePieces[i].ycoord = destY;
             removeBlackPieceAt(destX, destY);
             turnBit = !turnBit;
-            console.log('moved white piece')
             return;
         }
     }
@@ -439,10 +442,45 @@ function movePieceToPosition(orgX, orgY, destX, destY) {
             board.blackPieces[j].ycoord = destY;
             removeWhitePieceAt(destX, destY);
             turnBit = !turnBit;
-            console.log('moved black piece')
             return;
         }
     }
+}
+
+function processSurrender() {
+    registerLoss();
+    sendData('Surrender', 'null');
+    endGame();
+}
+
+function endGame() {
+    console.log('Game has ended ... ');
+    noLoop();
+    sendMessage({msgType: "message"}, {room: roomName}, {msg: 'bye'}); // leave the room in the server
+}
+
+function registerVictory() {
+    const url = '/win';
+    const param = {
+        method:"POST"
+    }
+
+    fetch(url,param)
+    .then(data=>{console.log(data)})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error))
+}
+
+function registerLoss() {
+    const url = '/losses';
+    const param = {
+        method:"POST"
+    }
+
+    fetch(url,param)
+    .then(data=>{console.log(data)})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error))
 }
 
 

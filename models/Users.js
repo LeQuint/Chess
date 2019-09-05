@@ -16,6 +16,16 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+
+    wins: {
+        type: Number,
+        default: 0
+    },
+
+    losses: {
+        type: Number,
+        default: 0
+    },
 })
 
 const User = mongoose.model('User', UserSchema);

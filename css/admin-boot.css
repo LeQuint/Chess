@@ -12068,4 +12068,15 @@
     text-align: center;
     list-style-type:none;
   }
+
+  .menu-block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #4e73df;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
   

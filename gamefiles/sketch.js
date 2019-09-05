@@ -18,6 +18,10 @@ function startGame() {
     if (isInitiator) {
         sendData('initGame', playerColorPreference);
     } 
+
+    document.getElementById("startButton").disabled = true;
+    document.getElementById("surrenderButton").disabled = false;
+    document.getElementById("MenuLink").click();
 }
 
 
