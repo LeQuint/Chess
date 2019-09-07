@@ -31,6 +31,7 @@ function mousePressed(){
     if( currentPiece != null ) {
         if ( turnBit == true && currentPiece.pieceColor == 'white' && playerColor == 'white') { // white move
             currentPiece.generateValidMoves();
+            flipPossibleMoves();
         }
 
         else if ( turnBit == false && currentPiece.pieceColor == 'black' && playerColor == 'black') { // black move
@@ -53,10 +54,10 @@ function releasePiece() {
             let currentPiece = board.whitePieces[board.indexBeingMoved];
             currentPiece.beingMoved = false;
 
-            sendData('movePiece', {orgX: currentPiece.xcoord, orgY: currentPiece.ycoord, destX: floor(mouseX/TILESIZE), destY: floor(mouseY/TILESIZE)});
+            sendData('movePiece', {orgX: currentPiece.xcoord, orgY: currentPiece.ycoord, destX: 7 - floor(mouseX/TILESIZE), destY: 7 - floor(mouseY/TILESIZE)});
 
-            currentPiece.xcoord = floor(mouseX/TILESIZE);
-            currentPiece.ycoord = floor(mouseY/TILESIZE);
+            currentPiece.xcoord = 7 - floor(mouseX/TILESIZE);
+            currentPiece.ycoord = 7 - floor(mouseY/TILESIZE);
 
             if ( currentPiece instanceof pawn) {
                 if ( currentPiece.ycoord == 7 ) {

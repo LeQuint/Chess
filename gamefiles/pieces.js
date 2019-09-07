@@ -1251,7 +1251,6 @@ class pawn extends piece {
 
     generateValidMoves() {
         if ( this.pieceColor == 'white' ) {
-
             if ( !checkIfPieceIsHere( this.xcoord, this.ycoord + 1 )) {
                 if ( this.ycoord + 1 < 8 ) {
                     if(!checkIfKingIsInDanger(this, this.xcoord, this.ycoord + 1))

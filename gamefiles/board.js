@@ -68,51 +68,134 @@ function drawValidMoves () {
 }
     
 function drawPieces ( board ) {
-    board.whitePieces.forEach( function (piece) {
-        if( piece.beingMoved == false ){
-            image(piece.image, piece.xcoord * TILESIZE, piece.ycoord * TILESIZE, TILESIZE, TILESIZE);
-        }
-        else {
-            image(piece.image, mouseX - TILESIZE/2, mouseY - TILESIZE/2, TILESIZE, TILESIZE);
-        }
-    });
 
-    board.blackPieces.forEach( function (piece) {
+    if(playerColor == 'white') {
+        let translate;
+        board.whitePieces.forEach( function (piece) {
+
+            translate = flippedCoordinate(piece.xcoord, piece.ycoord);
+            transX = translate.x;
+            transY = translate.y;
+
+            if( piece.beingMoved == false ){
+                image(piece.image, transX * TILESIZE, transY * TILESIZE, TILESIZE, TILESIZE);
+            }
+            else {
+                image(piece.image, mouseX - TILESIZE/2, mouseY - TILESIZE/2, TILESIZE, TILESIZE);
+            }
+        });
+
+        board.blackPieces.forEach( function (piece) {
+
+                translate = flippedCoordinate(piece.xcoord, piece.ycoord);
+                transX = translate.x;
+                transY = translate.y;
+
+                if( piece.beingMoved == false ){
+                    image(piece.image, transX * TILESIZE, transY * TILESIZE, TILESIZE, TILESIZE);
+                }
+                else {
+                    image(piece.image, mouseX - TILESIZE/2, mouseY - TILESIZE/2, TILESIZE, TILESIZE);
+                }
+        });
+    } else {
+        board.whitePieces.forEach( function (piece) {
             if( piece.beingMoved == false ){
                 image(piece.image, piece.xcoord * TILESIZE, piece.ycoord * TILESIZE, TILESIZE, TILESIZE);
             }
             else {
                 image(piece.image, mouseX - TILESIZE/2, mouseY - TILESIZE/2, TILESIZE, TILESIZE);
             }
+        });
+
+        board.blackPieces.forEach( function (piece) {
+                if( piece.beingMoved == false ){
+                    image(piece.image, piece.xcoord * TILESIZE, piece.ycoord * TILESIZE, TILESIZE, TILESIZE);
+                }
+                else {
+                    image(piece.image, mouseX - TILESIZE/2, mouseY - TILESIZE/2, TILESIZE, TILESIZE);
+                }
+        });
+    }
+}
+
+function flippedCoordinate(xcoord, ycoord) {
+    translatedX = 7 - xcoord;
+    translatedY = 7 - ycoord;
+    
+    return {x: translatedX, y: translatedY}
+}
+
+function flipPossibleMoves() {
+    let translate
+    possibleMoves.forEach( function(element) {
+        translate = flippedCoordinate(element.x, element.y);
+        element.x = translate.x;
+        element.y = translate.y;
     });
 }
 
 function getPieceAt ( xcoord, ycoord ) {
-    board.whitePieces.forEach( function ( piece, i ) {
-        if ( xcoord > piece.xcoord * TILESIZE && 
-           xcoord < piece.xcoord * TILESIZE + TILESIZE && 
-           ycoord > piece.ycoord * TILESIZE && 
-           ycoord < piece.ycoord * TILESIZE + TILESIZE )
-        {
-            piece.beingMoved = true;
-            board.indexBeingMoved = i;
-            board.colorBeingMoved = "white";
+    if (playerColor == 'white') {
+        let translate; 
+        board.whitePieces.forEach( function ( piece, i ) {
+            translate = flippedCoordinate(piece.xcoord, piece.ycoord);
+            transX = translate.x;
+            transY = translate.y;
+            if ( xcoord > transX * TILESIZE && 
+            xcoord < transX * TILESIZE + TILESIZE && 
+            ycoord > transY * TILESIZE && 
+            ycoord < transY * TILESIZE + TILESIZE )
+            {
+                piece.beingMoved = true;
+                board.indexBeingMoved = i;
+                board.colorBeingMoved = "white";
 
-        }
-    });
+            }
+        });
 
-    board.blackPieces.forEach ( function( piece, i ) {
-        if ( xcoord > piece.xcoord * TILESIZE && 
-           xcoord < piece.xcoord * TILESIZE + TILESIZE && 
-           ycoord > piece.ycoord * TILESIZE && 
-           ycoord < piece.ycoord * TILESIZE + TILESIZE )
-        {
-            piece.beingMoved = true;
-            board.indexBeingMoved = i;
-            board.colorBeingMoved = "black";
+        board.blackPieces.forEach ( function( piece, i ) {
+            translate = flippedCoordinate(piece.xcoord, piece.ycoord);
+            transX = translate.x;
+            transY = translate.y;
+            if ( xcoord > transX * TILESIZE && 
+            xcoord < transX * TILESIZE + TILESIZE && 
+            ycoord > transY * TILESIZE && 
+            ycoord < transY * TILESIZE + TILESIZE )
+            {
+                piece.beingMoved = true;
+                board.indexBeingMoved = i;
+                board.colorBeingMoved = "black";
 
-        }
-    });
+            }
+        });
+    } else {
+        board.whitePieces.forEach( function ( piece, i ) {
+            if ( xcoord > piece.xcoord * TILESIZE && 
+            xcoord < piece.xcoord * TILESIZE + TILESIZE && 
+            ycoord > piece.ycoord * TILESIZE && 
+            ycoord < piece.ycoord * TILESIZE + TILESIZE )
+            {
+                piece.beingMoved = true;
+                board.indexBeingMoved = i;
+                board.colorBeingMoved = "white";
+
+            }
+        });
+
+        board.blackPieces.forEach ( function( piece, i ) {
+            if ( xcoord > piece.xcoord * TILESIZE && 
+            xcoord < piece.xcoord * TILESIZE + TILESIZE && 
+            ycoord > piece.ycoord * TILESIZE && 
+            ycoord < piece.ycoord * TILESIZE + TILESIZE )
+            {
+                piece.beingMoved = true;
+                board.indexBeingMoved = i;
+                board.colorBeingMoved = "black";
+
+            }
+        });
+    }
 
     if ( board.colorBeingMoved == "white" ) {
         return board.whitePieces[board.indexBeingMoved];
