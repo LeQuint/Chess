@@ -8,7 +8,7 @@ The following content will go over the design and implementation of my chess web
   - [Chess](#chess)
 - [Intro](#intro)
 - [How it's built](#api)
-  * [Client](#client)
+  * [The Game](#the_game)
     + [store](#store)
     + [reducers](#reducers)
     + [actions](#actions)
@@ -17,6 +17,8 @@ The following content will go over the design and implementation of my chess web
     + [jS](#js)
       - [_design_](#-design-)
       - [_design_](#-design--1)
+  * [The Back-End] (#the_back-end)
+  * [The Front-End] (#the_front-end)
 - [Scheduling](#scheduling)
   * [Locking sections](#locking-sections)
   * [Adding breaks](#adding-breaks)
@@ -48,7 +50,7 @@ At least until UBC enables cors or provides its own API, to fetch UBC websites, 
 However, in the case that the api fails/crashes, the current client uses client side scraping as a backup in ```backupscraper.js``` Courselist involves fetching multiple pages, so as a backup, a prefetched courselist written directly in the code is used. 
 
 
-## Client
+## The Game
 *! Note that this was my first project using React and React-Redux, so I most likely broke many standards and patterns*
 
 Built with React and React-Redux, App.js specifies the store (storing the state of our app) and components that compose our app. I used [create-react-app](https://github.com/facebook/create-react-app) to setup the project. 
@@ -154,6 +156,9 @@ css files for a particular component is included in the component itself.
 
 - ```scheduler``` - contains the main scheduling algorithm
 
+## The Back-End
+
+## The Front-End
 
 # Scheduling
 We use a recursive depth-first-search scheduling algorithm.  
