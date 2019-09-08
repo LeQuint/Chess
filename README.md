@@ -8,20 +8,20 @@ NOTE: The following content will go over the design and implementation of my che
 - [Notes](#notes)
 - [Intro](#intro)
 - [Design](#design)
-  * [Game](#game)
-  	+ [p5.js](#p5.js)
-    + [Game Logic](#game-logic)
+  * [Game](#the-game)
+  	+ [p5.js](#p5)
+    + [Class Structure](#class-structure)
     + [WebRTC and WebSockets](#webrtc-and-websockets)
 
-  * [Back-End](#backend)
-  	+ [MongoDB and Passport.js](#p5.js)
+  * [Back-End](#the-backend)
+  	+ [MongoDB and Passport.js](#mongodb-and-passport)
     + [Express Routing](#game-logic)
 
-  * [Front-End](#frontend)
+  * [Front-End](#the-frontend)
   * [Deployment](#deployment)
 
 - [Testing and Debugging](#testing-and-debugging)
-- [Things I've Learned](#things-i've-learned)
+- [Future Considerations](#future-considerations)
 
 
 # Intro
@@ -35,31 +35,48 @@ The main goal of this project is to get accustomed to the different web technolo
 -	Google App Engine for deployment
 
 The front-end template is taken from <https://github.com/BlackrockDigital/startbootstrap-sb-admin-2>. Everything else was built from scratch.
-
-
 ![ScreenShot](./pics/gamePlay.png)
 
-
 # Design
+This section will cover the design and implementations of this web app. Please note this project is for educational purposes so the code may not be suitable for a production enviroment.
 
-## Game
+## The Game
+The game of chess was chosen since it is somewhat algorithmically challenging to implement while requiring minimal graphicial rendering. Aside from the p5 library used to render the graphics, everthing else is coded from scratch using ECMA6 JavaScript.
 
-### P5.js
+### p5
+The p5 library provides a very simple way to generate graphics as well as a set of tools to facilitate user interactions. For these reasons, it made it very suitable for developing a simple game such as chess. If you look in /gamefiles/sketch.js, you will see the main structure p5 uses to render graphics.
 
-### Game Logic
+```javascript
+function setup() {
+    var canvas = createCanvas( TILESIZE * 8, TILESIZE * 8 );
+    canvas.parent('sketch-holder');
+    board = new Board();
+    noLoop();
+}
+
+function draw() {
+    drawBoard();
+    drawPieces ( board );
+    drawValidMoves();
+}
+```
+```setup()``` is ran once the library is loaded and once the ```loop()``` function is called, the library will continuously loop over ```draw()``` to render a view. Other helper function such as ```mousePressed()``` and ```mouseReleased()``` were used to allow the user to interact with the game.
+
+### Class Structure
+The game has two main classes, ```Board``` and ```piece```
 
 ### WebRTC and WebSockets
 
-## Backend
+## The Backend
 
-### MongoDB and Passport.js
+### MongoDB and Passport
 
 ### Express Routing
 
-## Frontend
+## The Frontend
 
 ## Deployment
 
 # Testing and Debugging
 
-# Things I've Learned
+# Future Considerations
