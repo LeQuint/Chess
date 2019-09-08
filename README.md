@@ -2,7 +2,9 @@
 NOTE: Currently fixing issue with WebSockets on Google App Engine, game connection isn't working over web. Please visit
 <https://github.com/LeQuint/chess-ws/> to set up local WebSocket Server to test out the full functionality of the app.
 
-NOTE: The following content will go over the design and implementation of my chess web app. Check out the site at <https://chess-web-app-109.appspot.com/> <br/>
+NOTE: Check out the site at <https://chess-web-app-109.appspot.com/> <br/>
+
+Note: The front-end template is taken from <https://github.com/BlackrockDigital/startbootstrap-sb-admin-2>.
 
 ## Contents
 - [Notes](#notes)
@@ -11,6 +13,7 @@ NOTE: The following content will go over the design and implementation of my che
   * [Game](#the-game)
   	+ [p5.js](#p5)
     + [Class Structure](#class-structure)
+	+ [Game Logic](#game-logic)
     + [WebRTC and WebSockets](#webrtc-and-websockets)
 
   * [Back-End](#the-backend)
@@ -34,7 +37,6 @@ The main goal of this project is to get accustomed to the different web technolo
 -	p5.js to render graphics and implement game logic
 -	Google App Engine for deployment
 
-The front-end template is taken from <https://github.com/BlackrockDigital/startbootstrap-sb-admin-2>. Everything else was built from scratch.
 ![ScreenShot](./pics/gamePlay.png)
 
 # Design
@@ -44,7 +46,7 @@ This section will cover the design and implementations of this web app. Please n
 The game of chess was chosen since it is somewhat algorithmically challenging to implement while requiring minimal graphicial rendering. Aside from the p5 library used to render the graphics, everthing else is coded from scratch using ECMA6 JavaScript.
 
 ### p5
-The p5 library provides a very simple way to generate graphics as well as a set of tools to facilitate user interactions. For these reasons, it made it very suitable for developing a simple game such as chess. If you look in /gamefiles/sketch.js, you will see the main structure p5 uses to render graphics.
+The p5 library provides a very simple way to generate graphics as well as a set of tools to facilitate user interactions. For these reasons, it made it very suitable for developing a simple game such as chess. If you look in [sketch.js](/gamefiles/sketch.js), you will see the main structure p5 uses to render graphics.
 
 ```javascript
 function setup() {
@@ -63,9 +65,43 @@ function draw() {
 ```setup()``` is ran once the library is loaded and once the ```loop()``` function is called, the library will continuously loop over ```draw()``` to render a view. Other helper function such as ```mousePressed()``` and ```mouseReleased()``` were used to allow the user to interact with the game.
 
 ### Class Structure
-The game has two main classes, ```Board``` and ```piece```
+The game has two main classes, ```Board``` and ```piece``` which can be seen at [board.js](/gamefiles/board.js) and [pieces.js](/gamefiles/pieces.js).
+```javascript
+class Board{
+    constructor() {
+     this.whitePieces = [];
+     this.blackPieces = [];
+     this.indexBeingMoved;
+     this.colorBeingMoved;
+     this.setupPieces();
+    }
+    setupPieces() {
+      /* ...  */
+    }
+}
+class piece {
+    constructor(xcoord,ycoord, pieceImage, pieceColor){
+        this.xcoord = xcoord;
+        this.ycoord = ycoord;
+        this.beingMoved = false;
+        this.image = pieceImage;
+        this.pieceColor = pieceColor;
+        this.firstMove = true;
+        this.mute = false;
+    }
+}
+```
+
+Each chess piece inherits the properties of ```piece ``` and has two main functions to facilitate game logic:
+1. ```generateValidMoves()``` - Interates the board to see which moves are valid for that piece in that given turn
+2. ```generateBoardControl()``` - Generates the board control of that given piece at its current board position
+
+The ```Board``` class acts as the parent object to all pieces and keeps track of all the pieces and game information
+
+### Game Logic
 
 ### WebRTC and WebSockets
+
 
 ## The Backend
 
