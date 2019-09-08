@@ -110,7 +110,12 @@ All supporting functions are located at [gameLogic.js](/gamefiles/gameLogic.js).
 For a user to connect to another user, they simply have to specify a room number in the game menu 
 ![ScreenShot](./pics/gameMenu.png) ![ScreenShot](./pics/roomModel.png)
 
-The code in [/RTC](/RTC) handles the rest of the connection.
+The code in [/RTC](/RTC) handles the rest of the connection. Please visit: <https://codelabs.developers.google.com/codelabs/webrtc-web/> for a in depth explanation of the code. Here is a simplified explanation:
+1. The ```var signalSocket``` object establishes a connection with the websocket server
+2. Once connected, the ```signalSocket``` object is used to send messages to the websocket server to join a room
+3. If two users have joined the same room, the websocket server initialises the peer-to-peer connection between the two parties
+4. Once the two users are connected they can send data directly to each other using the ```sendData(...)``` method
+5. When the connection is terminated between the users, they both inform the websocket server and are removed from the rooms
 
 ## The Backend
 
