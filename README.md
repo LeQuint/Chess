@@ -35,7 +35,7 @@ The main goal of this project is to get accustomed to the different web technolo
 The front-end template is taken from <https://github.com/BlackrockDigital/startbootstrap-sb-admin-2>. Everything else was built from scratch.
 
 
-![ScreenShot](./demo.png)
+![ScreenShot](./pics/gamePlay.png)
 
 
 # How it's built
