@@ -1,5 +1,5 @@
 // TODO: Find a better way to scope/link modules
-var signalSocket = new WebSocket("wss://localhost:3000");
+var signalSocket = new WebSocket("ws://localhost:3000");
 var roomName;
 
 function sendMessage(msgType, room, message) {

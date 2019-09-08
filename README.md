@@ -6,7 +6,7 @@ The following content will go over the design and implementation of my chess web
 
 ## Contents
   - [Chess](#chess)
-- [Features](#features)
+- [Intro](#intro)
 - [How it's built](#api)
   * [Client](#client)
     + [store](#store)
@@ -22,16 +22,18 @@ The following content will go over the design and implementation of my chess web
   * [Adding breaks](#adding-breaks)
 - [Production](#production)
 
-# Features
-A major design goal for this scheduler is real-time feedback. Before, when scheduling happens in stages (user adds courses, adds breaks, locks sections etc) and then schedules, it was very different to find out which courses collude or what exactly caused no schedules to be found. By scheduling in real time and alerting users in real time, users can pinpoint which action was the problem. 
+# Intro
+The main goal of this project is to get accustomed to the different web technologies and to play around with WebSockets and WebRTC to implement a serverless connection which allows users to send each other data. The different web technologies incorporated in this project are:
 
--   Schedule both terms at the same time    
--   Visualize sections by hovering and lock sections by clicking    
--   Add breaks by dragging or by a form    
--   Save schedules    
--   Create your custom courses (especially useful for Standard Timetables)    
--   Register sections by clicking on generated links    
--   Schedule in real-time whenever an action (adding a course, break, locking a section, etc...) is made
+-   Node.js & Express for back-end
+-	MongoDB & Passport.js for user validation
+-   EJS layouts & BootStrap for front-end
+-   WebRTC & WebSockets for real-time connection between users
+-	p5.js to render graphics and implement game logic
+-	Google App Engine for deployment
+
+The front-end template is taken from <https://github.com/BlackrockDigital/startbootstrap-sb-admin-2>. Everything else was built from scratch.
+
 
 ![ScreenShot](./demo.png)
 
