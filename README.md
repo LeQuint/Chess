@@ -67,7 +67,7 @@ function draw() {
 ### Class Structure
 The game has two main classes, ```Board``` and ```piece``` which can be seen at [board.js](/gamefiles/board.js) and [pieces.js](/gamefiles/pieces.js).
 ```javascript
-class Board{
+class Board {
     constructor() {
      this.whitePieces = [];
      this.blackPieces = [];
@@ -96,9 +96,15 @@ Each chess piece inherits the properties of ```piece ``` and has two main functi
 1. ```generateValidMoves()``` - Interates the board to see which moves are valid for that piece in that given turn
 2. ```generateBoardControl()``` - Generates the board control of that given piece at its current board position
 
-The ```Board``` class acts as the parent object to all pieces and keeps track of all the pieces and game information
+The ```Board``` class acts as the parent object to all pieces and keeps track of all the pieces and game information. The board grid is set up starting from (0,0)
+in the top left corner and increments downwards and leftwards to (7,7) to for a 8x8 chess board.
 
 ### Game Logic
+All supporting functions are located at [gameLogic.js](/gamefiles/gameLogic.js). The functions consist of:
+1. Search functions such as ```returnPieceAt(xcoord,ycoord)``` which returns the piece at a given position by reference
+2. Validation functions such as ```checkIfMovingThrough(posX, posY , destX, destY)``` and ```checkIfPieceIsHere(xcoord,ycoord)```
+3. And functions which handles game mechanics such as ```castleLogic(piece)``` and ```evolve(pawn, index)```
+
 
 ### WebRTC and WebSockets
 
