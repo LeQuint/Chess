@@ -129,7 +129,7 @@ Libraries used in the back-end
 7. express - for routing and server logic
 
 ### Express Routing
-The starting point for the backend is [app.js](/app.js) which also includes [index.js](/routes/index.js) and [user.js](/routes/index.js). index.js contains all the route handles once user has logged in and user.js handles all the routes before login. Since express-ejs-layouts automatically searches within the /view folder for routes, all directory references had to be explicitly declared as follows in app.js
+The starting point for the backend is [app.js](/app.js) which also includes [index.js](/routes/index.js) and [user.js](/routes/index.js). index.js contains all the route handles once user has logged in and user.js handles all the routes before login. Since express-ejs-layouts automatically searches within the /views folder for routes, all directory references had to be explicitly declared as follows in app.js
 
 ```javascript
 app.use('/', require('./routes/index'));
@@ -144,7 +144,7 @@ app.use('/RTC', express.static(__dirname + "/RTC"));
 ### MongoDB and Passport
 The database schema is in [User.js](/models/Users.js) and the authentication strategy is in [authentication.js](/config/authentication.js). Please note that key.js is not commited to public repository since it contains login information to my MongoDB Atlas account. 
 
-Each user stores very basic information as shown the database schema
+Each user entry stores very basic information as shown in the following database schema:
 ```javascript
 const UserSchema = new mongoose.Schema({
     name: {
@@ -177,8 +177,11 @@ const UserSchema = new mongoose.Schema({
 ```
 
 ## The Frontend
+EJS views are stored in the [/views](/views) folder and each component/partials is under [/views/partials](/views/partials). Only one layout is used for all pages in this project and can be seen [here](/views/layout.ejs). Bootstrap and Font Awesome are used for styling and organization. 
 
 ## Deployment
+The app is deployed to Google App Engine by following the instructions at: <https://cloud.google.com/appengine/docs/standard/nodejs/quickstart>
+I am currently working on the deployment of the WebSocket server. The code for the WebSocket server can be seen at <https://github.com/LeQuint/chess-ws>
 
 # Testing and Debugging
 
