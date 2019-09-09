@@ -142,6 +142,39 @@ app.use('/RTC', express.static(__dirname + "/RTC"));
  ```
 
 ### MongoDB and Passport
+The database schema is in [User.js](/models/Users.js) and the authentication strategy is in [authentication.js](/config/authentication.js). Please note that key.js is not commited to public repository since it contains login information to my MongoDB Atlas account. 
+
+Each user stores very basic information as shown the database schema
+```javascript
+const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        require: true
+    },
+    email: {
+        type: String,
+        require: true
+    },
+    password: {
+        type: String,
+        require: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    },
+
+    wins: {
+        type: Number,
+        default: 0
+    },
+
+    losses: {
+        type: Number,
+        default: 0
+    },
+})
+```
 
 ## The Frontend
 
