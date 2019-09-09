@@ -4,7 +4,7 @@ NOTE: Currently fixing issue with WebSockets on Google App Engine, game connecti
 
 NOTE: Check out the site at <https://chess-web-app-109.appspot.com/> <br/>
 
-Note: The front-end template is taken from <https://github.com/BlackrockDigital/startbootstrap-sb-admin-2>.
+NOTE: The front-end template is taken from <https://github.com/BlackrockDigital/startbootstrap-sb-admin-2>.
 
 ## Contents
 - [Notes](#notes)
@@ -110,7 +110,7 @@ The code in [/RTC](/RTC) handles the rest of the connection. Please visit: <http
 1. The ```var signalSocket``` object establishes a connection with the websocket server
 2. Once connected, the ```signalSocket``` object is used to send messages to the websocket server to join a room
 3. If two users have joined the same room, the websocket server initialises the peer-to-peer connection between the two parties
-4. Once the two users are connected they can send data directly to each other using the ```sendData(...)``` method
+4. Once the two users are connected, they can send data directly to each other using the ```sendData(...)``` method
 5. When the connection is terminated between the users, they both inform the websocket server and are removed from the rooms
 
 ## The Backend
