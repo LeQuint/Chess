@@ -17,8 +17,8 @@ Note: The front-end template is taken from <https://github.com/BlackrockDigital/
     + [WebRTC and WebSockets](#webrtc-and-websockets)
 
   * [Back-End](#the-backend)
-  	+ [MongoDB and Passport.js](#mongodb-and-passport)
     + [Express Routing](#game-logic)
+  	+ [MongoDB and Passport.js](#mongodb-and-passport)
 
   * [Front-End](#the-frontend)
   * [Deployment](#deployment)
@@ -40,7 +40,7 @@ The main goal of this project is to get accustomed to the different web technolo
 ![ScreenShot](./pics/gamePlay.png)
 
 # Design
-This section will cover the design and implementations of this web app. Please note this project is for educational purposes so the code may not be suitable for a production enviroment.
+This section will cover the design and documentation of this web app. Please note this project is for educational purposes so the code may not be suitable for a production enviroment.
 
 ## The Game
 The game of chess was chosen since it is somewhat algorithmically challenging to implement while requiring minimal graphicial rendering. Aside from the p5 library used to render the graphics, everthing else is coded from scratch using ECMA6 JavaScript.
@@ -118,10 +118,30 @@ The code in [/RTC](/RTC) handles the rest of the connection. Please visit: <http
 5. When the connection is terminated between the users, they both inform the websocket server and are removed from the rooms
 
 ## The Backend
+Libraries used in the back-end
 
-### MongoDB and Passport
+1. express-ejs-layouts - to assemble ejs views and serve to front-end
+2. mongoose - to abstract away the MongoDB Atlas API
+3. connect-flash - to display flash messages to the user
+4. express-session - storing user information between pages
+5. passport - for user validation
+6. bcryptjs - to encrypt/decrypt user password
+7. express - for routing and server logic
 
 ### Express Routing
+The starting point for the backend is [app.js](/app.js) which also includes [index.js](/routes/index.js) and [user.js](/routes/index.js). index.js contains all the route handles once user has logged in and user.js handles all the routes before login. Since express-ejs-layouts automatically searches within the /view folder for routes, all directory references had to be explicitly declared as follows in app.js
+
+```javascript
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+app.use('/gamefiles', express.static(__dirname + "/gamefiles"));
+app.use('/images', express.static(__dirname + "/gamefiles/images"));
+app.use('/js', express.static(__dirname + "/js"));
+app.use('/css', express.static(__dirname + "/css"));
+app.use('/RTC', express.static(__dirname + "/RTC"));
+ ```
+
+### MongoDB and Passport
 
 ## The Frontend
 
