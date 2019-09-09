@@ -23,10 +23,6 @@ Note: The front-end template is taken from <https://github.com/BlackrockDigital/
   * [Front-End](#the-frontend)
   * [Deployment](#deployment)
 
-- [Testing and Debugging](#testing-and-debugging)
-- [Future Considerations](#future-considerations)
-
-
 # Intro
 The main goal of this project is to get accustomed to the different web technologies and to play around with WebSockets and WebRTC to implement a serverless connection which allows users to send each other data. The different web technologies incorporated in this project are:
 
@@ -40,7 +36,7 @@ The main goal of this project is to get accustomed to the different web technolo
 ![ScreenShot](./pics/gamePlay.png)
 
 # Design
-This section will cover the design and documentation of this web app. Please note this project is for educational purposes so the code may not be suitable for a production enviroment.
+The sections below will cover the implementation and documentation of this web app. Please note this project is for educational purposes so the code may not be suitable for a production enviroment.
 
 ## The Game
 The game of chess was chosen since it is somewhat algorithmically challenging to implement while requiring minimal graphicial rendering. Aside from the p5 library used to render the graphics, everthing else is coded from scratch using ECMA6 JavaScript.
@@ -177,12 +173,9 @@ const UserSchema = new mongoose.Schema({
 ```
 
 ## The Frontend
-EJS views are stored in the [/views](/views) folder and each component/partials is under [/views/partials](/views/partials). Only one layout is used for all pages in this project and can be seen [here](/views/layout.ejs). Bootstrap and Font Awesome are used for styling and organization. 
+EJS views are stored in the [/views](/views) folder and each component/partials is under [/views/partials](/views/partials). Only one layout is used for all pages in this project and can be seen [here](/views/layout.ejs). Bootstrap and Font Awesome are used for styling and grid organization. 
 
 ## Deployment
-The app is deployed to Google App Engine by following the instructions at: <https://cloud.google.com/appengine/docs/standard/nodejs/quickstart>
+The app is deployed to Google App Engine by following the instructions at: <https://cloud.google.com/appengine/docs/standard/nodejs/quickstart> <br>
 I am currently working on the deployment of the WebSocket server. The code for the WebSocket server can be seen at <https://github.com/LeQuint/chess-ws>
 
-# Testing and Debugging
-
-# Future Considerations
